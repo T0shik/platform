@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Shop";
+    Layout = "Shared/_StoreLayout";
+}
+
+@section Styles {
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/index.css"/>
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/css/index.min.css" asp-append-version="true"/>
+    </environment>
+}
+
+<div>
+    <div class="columns is-multiline">
+        @foreach (var product in Model.Products)
+        {
+            var active = product.OutOfStock ? "out-of-stock" : "in-stock";
+            <div class="column is-6-tablet is-4-desktop">
+                <a class="card @active" href="/@product.Slug">
+                    <div class="card-image">
+                        @if (product.Images.Count == 1)
+                        {
+                            <figure class="image is-square">
+                                <img src="@product.Images[0]" alt="">
+                            </figure>
+                        }
+                        else
+                        {
+                            <figure class="image front is-square">
+                                <img src="@product.Images[0]" alt="">
+                            </figure>
+                            <figure class="image back is-square">
+                                <img src="@product.Images[1]" alt="">
+                            </figure>
+                        }
+                    </div>
+                    <div class="card-content bkg-white justify-between align-end">
+                        <div class="title is-marginless is-4">@product.Name</div>
+                        <div class="header is-4">@product.Value</div>
+                    </div>
+                    <div class="line"></div>
+                    @if (product.OutOfStock)
+                    {
+                        <div class="ribbon red">Out Of Stock</div>
+                    }
+                    else if (product.LimitedStock)
+                    {
+                        <div class="ribbon orange">Limited</div>
+                    }
+                </a>
+            </div>
+        }
+    </div>
+</div>

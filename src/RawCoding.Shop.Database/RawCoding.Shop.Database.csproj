@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RawCoding.Core\RawCoding.Core.csproj" />
+    <ProjectReference Include="..\RawCoding.Shop.Domain\RawCoding.Shop.Domain.csproj" />
+  </ItemGroup>
+  
+</Project>

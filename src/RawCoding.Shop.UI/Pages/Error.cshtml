@@ -1,0 +1,22 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="hero">
+    <div class="hero-head text-white is-size-2">Error</div>
+    <div class="hero-body text-white is-size-4">
+        <span>
+            An error occured while processing your request. Please report this issue on the
+        </span>
+        <a class="is-link" href="https://discord.gg/Qp6hdq3" target="_blank">discord server</a>
+        <div>
+            Trace id:
+            @if (Model.ShowRequestId)
+            {
+                <strong>@Model.RequestId</strong>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@page
+@{
+}
+
+<div id="app">
+    <div v-if="!selectedProduct">
+        <table class="table">
+            <caption>Products</caption>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="product in products" @@click="selectProduct(product)">
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div v-else>
+        <table class="table">
+            <caption>{{selectedProduct.name}} Stock</caption>
+            <thead>
+            <tr>
+                <td>Description</td>
+                <td>Qty</td>
+                <td>Value</td>
+                <td>
+                    <button class="button is-success" @@click="addStock">
+                        Add
+                    </button>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(s, index) in stock">
+                <td>
+                    <input class="input" v-model="s.description"/>
+                </td>
+                <td>
+                    <input class="input" v-model.number="s.qty"/>
+                </td>
+                <td>
+                    <input class="input" v-model.number="s.value"/>
+                </td>
+                <td>
+                    <a class="has-text-danger" @@click="() => stock.splice(index, 1)">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="button is-warning" @@click="updateStock">
+            Update Stock
+        </a>
+        <a class="button" @@click="resetForm">
+            Cancel
+        </a>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/admin/stock.js"></script>
+}

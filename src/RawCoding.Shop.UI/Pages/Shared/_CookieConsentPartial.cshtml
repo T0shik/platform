@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div class="modal" id="cookieConsent">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box bkg-white">
+                <div class="flex-column align-center">
+                    <p class="mb-2">
+                        We use cookies to save your cart.
+                    </p>
+                    <button type="button" class="button flow-color" data-cookie-string="@cookieString">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            if(document.cookie.indexOf(".AspNet.Consent=yes") < 0){
+                document.getElementById('cookieConsent').classList.add('is-active')
+            }
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.getElementById("cookieConsent").classList.remove("is-active");
+            }, false);
+        })();
+    </script>
+}

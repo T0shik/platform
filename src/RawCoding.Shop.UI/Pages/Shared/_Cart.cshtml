@@ -1,0 +1,57 @@
+<div id="cart-app" v-cloak>
+    <div class="popup box bkg-black" :class="{'is-active': popup.active}">
+        <span :class="popupStyle">{{popup.message}}</span>
+    </div>
+    <button class="cart-button flow-color" @@click="open = true">
+        <img src="~/icons/cart-outline.svg" alt="Cart Icon">
+    </button>
+    <div class="modal modal-fx-3dRotateFromRight" :class="active" id="cart-container">
+        <div class="modal-background" @@click="open = false"></div>
+        <div class="modal-content cart-menu flex-column">
+            <p class="title is-size-3 has-text-centered mt-4">
+                Cart
+            </p>
+            <div class="cart-item-container mx-2">
+                <div class="columns mt-4 is-mobile" v-for="item in cart.items" :key="item.stockId">
+                    <div class="column">
+                        <figure class="image is-square">
+                            <img :src="item.image" alt="">
+                        </figure>
+                    </div>
+                    <div class="column flex-column py-3">
+                        <p class="is-size-4 is-bold">{{item.productName}}</p>
+                        <p class="heading mb-3">{{item.stockDescription}}</p>
+                        <p class="justify-between">
+                            <span>Costs:</span> <span class="is-bold">{{item.value}}</span>
+                        </p>
+                        <p class="justify-between">
+                            <span>Qty:</span> <span class="is-bold">{{item.qty}}</span>
+                        </p>
+                        <a class="has-text-danger" @@click="removeProduct(item)">Remove</a>
+                        <p class="mt-auto justify-between">
+                            <span>Total:</span> <span class="is-bold">{{item.totalValue}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto justify-end py-1 px-2 is-size-4 mx-2">
+
+            </div>
+            <div class="mt-auto justify-between align-end py-1 px-2 mx-2">
+                <div class="is-size-5">
+                    Shipping: <span class="is-bold ml-3">{{cart.shippingCharge}}</span>
+                </div>
+                <div class="is-size-4">
+                    Total: <span class="is-bold ml-3">{{cart.total}}</span>
+                </div>
+            </div>
+            <div class="line "></div>
+            <div class="flex justify-center py-4">
+                <a class="button flow-color" :disabled="disabled" asp-page="/Checkout/Delivery">
+                    Checkout
+                </a>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close" @@click="open = false"></button>
+    </div>
+</div>

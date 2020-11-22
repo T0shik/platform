@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>7f67124c-d998-4d64-befe-757dff53f62d</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
+    <PackageReference Include="Stripe.net" Version="39.27.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RawCoding.S3\RawCoding.S3.csproj" />
+    <ProjectReference Include="..\RawCoding.Shop.Application\RawCoding.Shop.Application.csproj" />
+    <ProjectReference Include="..\RawCoding.Shop.Database\RawCoding.Shop.Database.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EmailTemplates\**" CopyToPublishDirectory="Always" />
+  </ItemGroup>
+</Project>

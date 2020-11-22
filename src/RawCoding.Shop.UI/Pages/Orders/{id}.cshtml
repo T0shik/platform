@@ -1,0 +1,94 @@
+@page
+@model RawCoding.Shop.UI.Pages.Orders.OrderPage
+
+@{
+    ViewData["Title"] = $"Order {Model.Order.Id}";
+    Layout = "_Layout";
+}
+
+<div class="is-size-2 text-white has-text-centered">Order Summary</div>
+<div class="columns text-white">
+    <div class="column is-6">
+        <div class="is-size-3">Contact Information</div>
+        <table class="is-fullwidth">
+            <tbody>
+            <tr>
+                <td>Name:</td>
+                <td>@Model.Order.Cart.Name</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>@Model.Order.Cart.Email</td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td>@Model.Order.Cart.Phone</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="is-size-3">Delivery Information</div>
+
+        <table class="is-fullwidth">
+            <tbody>
+            <tr>
+                <td>Address1:</td>
+                <td>@Model.Order.Cart.Address1</td>
+            </tr>
+            <tr>
+                <td>Address2:</td>
+                <td>@Model.Order.Cart.Address2</td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td>@Model.Order.Cart.City</td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td>@Model.Order.Cart.Country</td>
+            </tr>
+            <tr>
+                <td>PostCode:</td>
+                <td>@Model.Order.Cart.PostCode</td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td>@Model.Order.Cart.State</td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>@Model.Order.Status</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <hr class="is-hidden-tablet">
+    </div>
+    <div class="column is-6">
+        <div class="is-size-3">Product Summary</div>
+
+        @foreach (var product in Model.Order.Cart.Products)
+        {
+            <div class="columns mt-4 is-mobile">
+                <div class="column is-paddingless">
+                    <figure class="image is-128x128">
+                        <img src="@product.Stock.Product.Images[0].Path" alt="">
+                    </figure>
+                </div>
+                <div class="column flex-column is-paddingless">
+                    <p class="is-size-4 is-bold">@product.Stock.Product.Name</p>
+                    <p class="heading mb-3">@product.Stock.Description</p>
+                    <p class="justify-between">
+                        <span>Price:</span> <span class="is-bold">@product.Stock.Value.ToMoney()</span>
+                    </p>
+                    <p class="justify-between">
+                        <span>Qty:</span> <span class="is-bold">@product.Qty</span>
+                    </p>
+                </div>
+            </div>
+        }
+        <div class="has-text-right is-size-5">Total <strong>@Model.Order.Cart.Total().ToMoney()</strong></div>
+    </div>
+</div>

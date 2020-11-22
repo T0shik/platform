@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Official Raw Coding Youtube channel shop. @ViewData["Description"]"/>
+    <meta name="keywords" content="raw coding, shop, @ViewData["Keywords"]"/>
+
+    <title>@ViewData["Title"] - Raw Coding</title>
+
+    <style>
+        [v-cloak] > * {
+            display: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;600;800;900&display=swap" rel="stylesheet">
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bulma.css"/>
+        <link rel="stylesheet" href="~/css/site.css"/>
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/lib/bulma.min.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
+    </environment>
+    @await RenderSectionAsync("Styles", required: false)
+
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bkg-black flex-column">
+
+<div class="hero">
+    <div class="hero-body flex justify-center align-center py-3">
+        <a class="justify-center align-center" href="/">
+            <div class="logo">
+                <img src="https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/logo.png" alt="Main Logo">
+            </div>
+            <span class="text-white is-size-1 is-size-1-desktop is-size-2-tablet is-size-4-mobile is-uppercase">raw coding</span>
+        </a>
+    </div>
+</div>
+
+<div class="container is-fullhd">
+    @RenderBody()
+</div>
+
+<div class="footer bkg-black">
+    <div class="has-text-centered">
+        <a class="mx-2" href="https://www.youtube.com/raw_coding" target="_blank">
+            <img src="https://aw-test-bucket.eu-central-1.linodeobjects.com/github_img/youtube.png">
+        </a>
+        <a class="mx-2" href="https://discord.gg/GeJ8vyy" target="_blank">
+            <img src="https://aw-test-bucket.eu-central-1.linodeobjects.com/github_img/discord.png">
+        </a>
+        <a class="mx-2" href="https://www.twitch.tv/raw_coding" target="_blank">
+            <img src="https://aw-test-bucket.eu-central-1.linodeobjects.com/github_img/twitch.png">
+        </a>
+        <a class="mx-2" href="https://twitter.com/anton_t0shik" target="_blank">
+            <img src="https://aw-test-bucket.eu-central-1.linodeobjects.com/github_img/twitter.png">
+        </a>
+        <a class="mx-2" href="https://instagram.com/anton_t0shik" target="_blank">
+            <img src="https://aw-test-bucket.eu-central-1.linodeobjects.com/github_img/instagram.png">
+        </a>
+    </div>
+    <div class="has-text-centered text-white">
+        &copy; Raw Coding @DateTime.Now.ToString("yyyy")
+    </div>
+</div>
+
+<partial name="_CookieConsentPartial"/>
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

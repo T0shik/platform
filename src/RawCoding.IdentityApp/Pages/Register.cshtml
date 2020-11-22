@@ -1,0 +1,48 @@
+@page
+@model RawCoding.Identity.Pages.Register
+
+@{
+}
+<section class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="title has-text-centered">
+                Register
+            </div>
+            <div class="columns">
+                <div class="column is-6 is-offset-3 is-4-desktop is-offset-4-desktop">
+                    <form class="card" method="post">
+                        <input asp-for="Form.ReturnUrl" type="hidden" value="@Model.Form.ReturnUrl">
+                        <div class="card-content">
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control">
+                                    <input asp-for="Form.Email" class="input" type="text" placeholder="Email">
+                                </div>
+                                <span asp-validation-for="Form.Email" class="help is-success"></span>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control">
+                                    <input asp-for="Form.Password" class="input" placeholder="Password">
+                                </div>
+                                <span asp-validation-for="Form.Password" class="help is-success"></span>
+                            </div>
+                            <div class="field">
+                                <label class="label">Confirm Password</label>
+                                <div class="control">
+                                    <input asp-for="Form.ConfirmPassword" class="input" placeholder="Password">
+                                </div>
+                                <span asp-validation-for="Form.ConfirmPassword" class="help is-success"></span>
+                            </div>
+                            <div class="is-flex is-justify-content-space-between is-align-items-center">
+                                <button type="submit" class="button">Register</button>
+                                <a asp-page="/login" asproute-return-url="@Model.Form.ReturnUrl" type="submit" class="is-link">Back to Login</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

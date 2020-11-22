@@ -1,0 +1,97 @@
+@page
+@model RawCoding.Shop.UI.Pages.Product
+
+@{
+    ViewData["Title"] = Model.SelectedProduct.Name;
+    Layout = "Shared/_StoreLayout";
+}
+
+@section Styles {
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/product.css"/>
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/css/product.min.css" asp-append-version="true"/>
+    </environment>
+}
+
+<div class="columns">
+    <div class="column is-5 is-offset-1">
+        <div class="carousel" id="carousel">
+            <div class="carousel-screen" id="carousel-screen">
+                @foreach (var image in Model.SelectedProduct.Images.Select(x => x.Path))
+                {
+                    <figure class="carousel-item image is-square">
+                        <img src="@image" alt="">
+                    </figure>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="column is-offset-1 mb-0">
+        <div class="content text-white expand">
+            <h1 class="mb-0">
+                @Model.SelectedProduct.Name -
+                <span class="text-light-blue">@Model.SelectedProduct.Stock.FirstOrDefault().Value.ToMoney()</span>
+            </h1>
+            <h4 class="mt-0">@Model.SelectedProduct.Series Series</h4>
+            <p>@Model.SelectedProduct.Description</p>
+        </div>
+        @if (Model.SelectedProduct.Stock.Any(x => x.Qty > 0))
+        {
+            if (Model.SelectedProduct.Stock.Count > 1)
+            {
+                <div class="field">
+                    <label class="label text-white">@Model.SelectedProduct.StockDescription</label>
+                    <div class="control">
+                        <div class="select">
+                            <select asp-for="Input.StockId">
+                                @foreach (var stock in Model.SelectedProduct.Stock)
+                                {
+                                    if (stock.Qty > 0)
+                                    {
+                                        <option value="@stock.Id">@stock.Description</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@stock.Id" disabled>@stock.Description</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Input.StockId" value="@Model.SelectedProduct.Stock.FirstOrDefault().Id"/>
+            }
+            <input type="hidden" asp-for="Input.ProductId" value="@Model.SelectedProduct.Id">
+            <div class="field">
+                <label class="label text-white">Quantity</label>
+                <div class="control">
+                    <div class="select">
+                        <select asp-for="Input.Qty">
+                            @for (var i = 1; i <= 10; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <button type="submit" class="button flow-color" onclick="addToCart()">Add To Cart</button>
+            </div>
+        }
+        else
+        {
+            <div class="heading has-text-danger">Out of Stock</div>
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="js/product.js" asp-append-version="true"></script>
+}
