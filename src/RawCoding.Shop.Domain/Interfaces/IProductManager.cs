@@ -8,7 +8,7 @@ namespace RawCoding.Shop.Domain.Interfaces
     {
         Task<int> CreateProduct(Product product);
         Product GetProductBySlug(string slug);
-        IEnumerable<Product> GetFrontPageProducts();
+        IEnumerable<object> GetFrontPageProducts();
 
         #region Admin
 

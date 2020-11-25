@@ -31,7 +31,7 @@
             <a asp-page="/Admin/Orders" class="title">Orders</a>
         </div>
     </div>
-    @if (User.HasClaim(ShopConstants.Claims.Role, ShopConstants.Roles.Admin))
+    @if (User.HasClaim(PlatformConstants.Claims.Role, PlatformConstants.Roles.Admin))
     {
         <div class="level-item has-text-centered">
             <div>

@@ -26,7 +26,7 @@ namespace RawCoding.Shop.UI.Controllers.Admin
         [HttpGet]
         public IEnumerable<object> GetProducts(
             [FromServices] GetProducts getProducts) =>
-            getProducts.Do();
+            getProducts.FrontPage();
 
         [HttpGet("{id}")]
         public object GetProduct(int id, [FromServices] GetProduct getProduct) =>

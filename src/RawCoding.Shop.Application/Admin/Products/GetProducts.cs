@@ -13,7 +13,7 @@ namespace RawCoding.Shop.Application.Admin.Products
             _productManager = productManager;
         }
 
-        public IEnumerable<object> Do() =>
-            _productManager.GetAdminPanelProducts();
+        public IEnumerable<object> FrontPage() =>
+            _productManager.GetFrontPageProducts();
     }
 }

@@ -7,11 +7,10 @@ namespace RawCoding.Shop.UI.Pages
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<GetProducts.ProductViewModel> Products { get; set; }
+        public IEnumerable<dynamic> Products { get; set; }
 
-        public void OnGet([FromServices] GetProducts getProducts)
+        public void OnGet()
         {
-            Products = getProducts.Do();
         }
     }
 }

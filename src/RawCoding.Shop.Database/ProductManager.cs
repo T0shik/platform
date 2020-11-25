@@ -47,12 +47,31 @@ namespace RawCoding.Shop.Database
                 .FirstOrDefault();
         }
 
-        public IEnumerable<Product> GetFrontPageProducts()
+        public IEnumerable<object> GetFrontPageProducts()
         {
             return _ctx.Products
-                .Where(x => x.Stock.Count > 0 && x.Published)
+                .Where(x => x.Published)
                 .Include(x => x.Stock)
                 .Include(x => x.Images)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Slug,
+                    x.Name,
+                    x.Description,
+                    x.Series,
+                    x.StockDescription,
+
+                    Stock = x.Stock.AsQueryable().Select(s => new
+                        {
+                            s.Id,
+                            s.Description,
+                            s.Qty,
+                            s.Value,
+                        })
+                        .ToList(),
+                    Images = x.Images.AsQueryable().Select(y => y.Path).ToList(),
+                })
                 .ToList();
         }
 

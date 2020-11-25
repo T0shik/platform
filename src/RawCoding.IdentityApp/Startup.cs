@@ -34,8 +34,8 @@ namespace RawCoding.Identity
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPlatformBaseServices(_config)
-                .AddPlatformDbContext(_config);
+            services.AddPlatformServices()
+                .AddPlatformDbContext();
 
             services.AddIdentity<PlatformUser, IdentityRole>(c =>
                 {
@@ -57,7 +57,7 @@ namespace RawCoding.Identity
 
             services.ConfigureApplicationCookie(o =>
             {
-                o.Cookie.Name = PlatformConstants.IdentityCookieName;
+                o.Cookie.Name = PlatformConstants.Schemas.Default;
                 o.Cookie.Domain = _platformSettings.CookieDomain;
             });
 

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RawCoding.Data;
 using RawCoding.Shop.Database;
 using RawCoding.Shop.Domain.Enums;
 using RawCoding.Shop.Domain.Models;
@@ -25,8 +26,6 @@ namespace RawCoding.Shop.UI
                 using var scope = host.Services.CreateScope();
                 var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                var userManger = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-                var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
 
                 if (env.IsDevelopment())
                 {
@@ -166,28 +165,28 @@ namespace RawCoding.Shop.UI
                         context.SaveChanges();
                     }
 
-                    var managerUser = new IdentityUser
-                    {
-                        UserName = "Manager",
-                        Email = "test@test.com",
-                    };
-
-                    userManger.CreateAsync(managerUser, "password").GetAwaiter().GetResult();
-                    var managerClaim = new Claim(ShopConstants.Claims.Role, ShopConstants.Roles.ShopManager);
-                    userManger.AddClaimAsync(managerUser, managerClaim).GetAwaiter().GetResult();
+                    // var managerUser = new IdentityUser
+                    // {
+                    //     UserName = "Manager",
+                    //     Email = "test@test.com",
+                    // };
+                    //
+                    // userManger.CreateAsync(managerUser, "password").GetAwaiter().GetResult();
+                    // var managerClaim = PlatformConstants.Shop.ManagerClaim;
+                    // userManger.AddClaimAsync(managerUser, managerClaim).GetAwaiter().GetResult();
                 }
-
-                if (env.IsDevelopment() || !context.Users.Any())
-                {
-                    var adminUser = new IdentityUser
-                    {
-                        UserName = "Admin",
-                    };
-
-                    userManger.CreateAsync(adminUser, config["AdminPassword"]).GetAwaiter().GetResult();
-                    var adminClaim = new Claim(ShopConstants.Claims.Role, ShopConstants.Roles.Admin);
-                    userManger.AddClaimAsync(adminUser, adminClaim).GetAwaiter().GetResult();
-                }
+                // todo move to IdentityApp
+                // if (env.IsDevelopment() || !context.Users.Any())
+                // {
+                //     var adminUser = new IdentityUser
+                //     {
+                //         UserName = "Admin",
+                //     };
+                //
+                //     userManger.CreateAsync(adminUser, config["AdminPassword"]).GetAwaiter().GetResult();
+                //     var adminClaim = PlatformConstants.AdminClaim;
+                //     userManger.AddClaimAsync(adminUser, adminClaim).GetAwaiter().GetResult();
+                // }
             }
             catch (Exception e)
             {
@@ -200,9 +199,6 @@ namespace RawCoding.Shop.UI
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseKestrel(options =>
-                {
-                    options.Limits.MaxRequestBodySize = 1_073_741_824;
-                });
+                .UseKestrel(options => { options.Limits.MaxRequestBodySize = 1_073_741_824; });
     }
 }

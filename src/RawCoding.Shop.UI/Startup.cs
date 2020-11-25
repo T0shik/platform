@@ -8,8 +8,9 @@ using RawCoding.Shop.Database;
 using Stripe;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using RawCoding.Data;
+using RawCoding.Data.Extensions;
 using RawCoding.S3;
-using RawCoding.Shop.UI.Extensions;
 using RawCoding.Shop.UI.Middleware.Shop;
 using RawCoding.Shop.UI.Workers.Email;
 
@@ -19,6 +20,7 @@ namespace RawCoding.Shop.UI
     {
         private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _env;
+        private const string NuxtAppCors = nameof(NuxtAppCors);
 
         public Startup(
             IConfiguration configuration,
@@ -48,17 +50,42 @@ namespace RawCoding.Shop.UI
                 }
                 else
                 {
-                    options.UseInMemoryDatabase("Dev");
+                    options.UseInMemoryDatabase("DevShop");
                 }
             });
 
+            services.AddPlatformServices()
+                .AddPlatformCookieAuthentication()
+                .AddVisitorCookie();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddVisitorPolicy()
+                    .AddAdminPolicy();
+
+                options.AddPolicy(PlatformConstants.Shop.Policies.ShopManager, policy => policy
+                    .AddAuthenticationSchemes(PlatformConstants.Schemas.Default)
+                    .RequireClaim(PlatformConstants.Claims.Role,
+                        PlatformConstants.Shop.Roles.ShopManager,
+                        PlatformConstants.Roles.Admin
+                    )
+                    .RequireAuthenticatedUser());
+            });
+
+            services.AddControllers();
+
             services
-                .AddControllersAndPages()
-                .AddShopAuthentication(_env, _config)
                 .AddApplicationServices()
                 .AddEmailService(_config)
                 .AddRawCodingS3Client(() => _config.GetSection(nameof(S3StorageSettings)).Get<S3StorageSettings>())
                 .AddScoped<PaymentIntentService>();
+
+            services.AddCors(options => options
+                .AddPolicy(NuxtAppCors, builder => builder
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()));
         }
 
         public void Configure(IApplicationBuilder app)
@@ -72,8 +99,7 @@ namespace RawCoding.Shop.UI
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseHttpsRedirection()
-                .UseStaticFiles()
+            app.UseCors(NuxtAppCors)
                 .UseCookiePolicy()
                 .UseRouting()
                 .UseMiddleware<ShopMiddleware>()
@@ -89,10 +115,7 @@ namespace RawCoding.Shop.UI
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapDefaultControllerRoute()
-                        .RequireAuthorization(ShopConstants.Policies.Customer);
-
-                    endpoints.MapRazorPages()
-                        .RequireAuthorization(ShopConstants.Policies.Customer);
+                        .RequireAuthorization(PlatformConstants.Policies.Visitor);
                 });
         }
 

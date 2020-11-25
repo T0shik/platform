@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using RawCoding.Data;
+using RawCoding.Data.Extensions;
 using RawCoding.Shop.Application.CartActions;
 using RawCoding.Shop.Domain.Interfaces;
 using Stripe;
@@ -16,7 +19,7 @@ namespace RawCoding.Shop.UI.Controllers
 {
     [ApiController]
     [Route("api/cart")]
-    [Authorize(Policy = ShopConstants.Policies.Customer)]
+    [Authorize(Policy = PlatformConstants.Policies.Visitor)]
     public class CartController : ControllerBase
     {
         private readonly ICartManager _cartManager;
@@ -27,27 +30,12 @@ namespace RawCoding.Shop.UI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("guest-auth")]
-        public async Task<IActionResult> Auth(string returnUrl = null)
+        [HttpGet(PlatformConstants.VisitorSignInPath)]
+        public async Task<IActionResult> VisitorSignIn(string returnUrl)
         {
-            var userId = Guid.NewGuid().ToString();
-            var identity = new ClaimsIdentity(new[]
-            {
-                new Claim(ShopConstants.Claims.Role, ShopConstants.Roles.Guest),
-                new Claim(ClaimTypes.NameIdentifier, userId),
-            }, ShopConstants.Schemas.Guest);
+            await HttpContext.AuthenticateVisitor();
 
-            var claimsPrinciple = new ClaimsPrincipal(identity);
-
-            await HttpContext.SignInAsync(
-                ShopConstants.Schemas.Guest,
-                claimsPrinciple,
-                new AuthenticationProperties
-                {
-                    IsPersistent = true
-                });
-
-            return Redirect(returnUrl ?? "/");
+            return Redirect(returnUrl);
         }
 
         [HttpGet]
