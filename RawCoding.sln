@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawCoding.Shop.Database", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawCoding.Shop.Domain", "src\RawCoding.Shop.Domain\RawCoding.Shop.Domain.csproj", "{D97A0DE4-01BB-4891-BF2B-B67E7D3A08E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawCoding.Shop.UI", "src\RawCoding.Shop.UI\RawCoding.Shop.UI.csproj", "{34F0565D-E884-4CC0-B06D-3D7FDC0BC9AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawCoding.Shop.Api", "src\RawCoding.Shop.Api\RawCoding.Shop.Api.csproj", "{34F0565D-E884-4CC0-B06D-3D7FDC0BC9AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2821B835-61B2-45AE-A451-EB2F144BFE32}"
 EndProject

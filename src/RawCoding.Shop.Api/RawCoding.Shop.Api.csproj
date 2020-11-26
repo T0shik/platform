@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>7f67124c-d998-4d64-befe-757dff53f62d</UserSecretsId>
+    <AssemblyName>RawCoding.Shop.Api</AssemblyName>
+    <RootNamespace>RawCoding.Shop.Api</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />

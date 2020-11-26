@@ -9,7 +9,7 @@
 // using RawCoding.Shop.Application.Emails;
 // using RawCoding.Shop.Database;
 // todo move to identityApp
-// namespace RawCoding.Shop.UI.Controllers.Admin
+// namespace RawCoding.Shop.Api.Controllers.Admin
 // {
 //     [Authorize(PlatformConstants.Policies.Admin)]
 //     public class UsersController : AdminBaseController
