@@ -4,6 +4,6 @@ namespace RawCoding.Shop.Domain.Models
     {
         public int Id { get; set; }
         public int Index { get; set; }
-        public string Path { get; set; }
+        public string Url { get; set; }
     }
 }

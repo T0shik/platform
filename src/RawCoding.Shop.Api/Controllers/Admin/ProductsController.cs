@@ -75,7 +75,7 @@ namespace RawCoding.Shop.UI.Controllers.Admin
                 product.Images.AddRange(results.Select((path, index) => new Image
                 {
                     Index = index,
-                    Path = path,
+                    Url = path,
                 }));
             }
 
@@ -102,7 +102,7 @@ namespace RawCoding.Shop.UI.Controllers.Admin
                 product.Images.AddRange(results.Select((path, index) => new Image
                 {
                     Index = index,
-                    Path = path,
+                    Url = path,
                 }));
             }
 

@@ -28,7 +28,7 @@ namespace RawCoding.Shop.Application.CartActions
                     x.StockId,
                     x.Qty,
                     x.Stock.Product.Name,
-                    Image = x.Stock.Product.Images.FirstOrDefault()?.Path,
+                    Image = x.Stock.Product.Images.FirstOrDefault()?.Url,
                     StockDescription = x.Stock.Description,
                     Value = x.Stock.Value.ToMoney(),
                     TotalValue = (x.Qty * x.Stock.Value).ToMoney(),

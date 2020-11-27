@@ -54,9 +54,11 @@ namespace RawCoding.Shop.Application.CartActions
             else
             {
                 product.Qty += request.Qty;
+                if (stock.Qty < product.Qty)
+                {
+                    return new BaseResponse("Not Enough Stock", false);
+                }
             }
-
-            stock.Qty -= request.Qty;
 
             await _cartManager.UpdateCart(cart);
 

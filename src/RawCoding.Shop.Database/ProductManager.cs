@@ -71,7 +71,7 @@ namespace RawCoding.Shop.Database
                             s.Value,
                         })
                         .ToList(),
-                    Images = x.Images.AsQueryable().Select(y => y.Path).ToList(),
+                    Images = x.Images.AsQueryable().Select(y => y.Url).ToList(),
                 })
                 .ToList();
         }

@@ -33,7 +33,7 @@ namespace RawCoding.Shop.Application.Projections
                 x.Stock.Product.Name,
                 x.Stock.Product.Series,
                 x.Stock.Product.Description,
-                DefaultImage = x.Stock.Product.Images[0].Path,
+                DefaultImage = x.Stock.Product.Images[0].Url,
             }),
             ShippingCharge = order.Cart.ShippingCharge.ToMoney(),
             Total = order.Cart.Total().ToMoney(),

@@ -44,10 +44,10 @@ namespace RawCoding.Shop.UI
                             Stock = new List<Stock> {stock1, stock2, stock3},
                             Images = new List<Image>
                             {
-                                new Image {Index = 0, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book.jpg"},
-                                new Image {Index = 1, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book2.jpg"},
-                                new Image {Index = 2, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/pen.jpg"},
-                                new Image {Index = 3, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
+                                new Image {Index = 0, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book.jpg"},
+                                new Image {Index = 1, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book2.jpg"},
+                                new Image {Index = 2, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/pen.jpg"},
+                                new Image {Index = 3, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
                             },
                             Published = true,
                         });
@@ -67,9 +67,9 @@ namespace RawCoding.Shop.UI
                             },
                             Images = new List<Image>
                             {
-                                new Image {Index = 0, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book.jpg"},
-                                new Image {Index = 1, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/pen.jpg"},
-                                new Image {Index = 2, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
+                                new Image {Index = 0, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book.jpg"},
+                                new Image {Index = 1, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/pen.jpg"},
+                                new Image {Index = 2, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
                             },
                             Published = true,
                         });
@@ -89,8 +89,8 @@ namespace RawCoding.Shop.UI
                             },
                             Images = new List<Image>
                             {
-                                new Image {Index = 0, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book.jpg"},
-                                new Image {Index = 1, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
+                                new Image {Index = 0, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/book.jpg"},
+                                new Image {Index = 1, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
                             },
                             Published = true,
                         });
@@ -108,8 +108,8 @@ namespace RawCoding.Shop.UI
                             },
                             Images = new List<Image>
                             {
-                                new Image {Index = 0, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/pen.jpg"},
-                                new Image {Index = 1, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
+                                new Image {Index = 0, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/pen.jpg"},
+                                new Image {Index = 1, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
                             },
                             Published = true,
                         });
@@ -126,7 +126,7 @@ namespace RawCoding.Shop.UI
                             },
                             Images = new List<Image>
                             {
-                                new Image {Index = 0, Path = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
+                                new Image {Index = 0, Url = "https://aw-test-bucket.eu-central-1.linodeobjects.com/raw-coding-shop/test-images/shirt.jpg"},
                             },
                             Published = true,
                         });

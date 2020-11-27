@@ -6,14 +6,10 @@ namespace RawCoding.Shop.Application.CartActions
     [Service]
     public class RemoveFromCart
     {
-        private readonly IStockManager _stockManager;
         private readonly ICartManager _cartManager;
 
-        public RemoveFromCart(
-            IStockManager stockManager,
-            ICartManager cartManager)
+        public RemoveFromCart(ICartManager cartManager)
         {
-            _stockManager = stockManager;
             _cartManager = cartManager;
         }
 
@@ -30,12 +26,6 @@ namespace RawCoding.Shop.Application.CartActions
             {
                 return new BaseResponse("Product not found", false);
             }
-
-            var stock = _stockManager.GetStock(request.StockId);
-
-            stock.Qty += removedStock;
-
-            await _stockManager.UpdateStockRange(new[] {stock});
 
             return new BaseResponse("Removed from cart");
         }

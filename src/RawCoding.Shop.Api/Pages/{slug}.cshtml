@@ -19,7 +19,7 @@
     <div class="column is-5 is-offset-1">
         <div class="carousel" id="carousel">
             <div class="carousel-screen" id="carousel-screen">
-                @foreach (var image in Model.SelectedProduct.Images.Select(x => x.Path))
+                @foreach (var image in Model.SelectedProduct.Images.Select(x => x.Url))
                 {
                     <figure class="carousel-item image is-square">
                         <img src="@image" alt="">
