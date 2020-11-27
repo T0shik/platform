@@ -27,7 +27,7 @@ namespace RawCoding.Shop.Application.CartActions
                 {
                     x.StockId,
                     x.Qty,
-                    ProductName = x.Stock.Product.Name,
+                    x.Stock.Product.Name,
                     Image = x.Stock.Product.Images.FirstOrDefault()?.Path,
                     StockDescription = x.Stock.Description,
                     Value = x.Stock.Value.ToMoney(),

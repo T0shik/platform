@@ -50,7 +50,7 @@ namespace RawCoding.Shop.UI.Controllers
             return Ok(await getCart.GetCartForComponent(userId));
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> UpdateCart(
             [FromBody] UpdateCart.Form request,
             [FromServices] UpdateCart updateCart)

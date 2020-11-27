@@ -3,6 +3,7 @@ using RawCoding.Shop.Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RawCoding.Shop.Domain.Extensions;
 using RawCoding.Shop.Domain.Interfaces;
 
 namespace RawCoding.Shop.Database
